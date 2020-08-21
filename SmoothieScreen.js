@@ -19,7 +19,11 @@ const SmoothieScreen = ({ smoothie }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20
+    padding: 20,
+    marginHorizontal: 10,
+    backgroundColor: '#eee',
+    shadowOpacity: 0.5,
+    shadowRadius: 10
   },
   headerText: {
     fontWeight: '700',
@@ -29,19 +33,21 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: '500',
-    color: '#222'
+    color: '#222',
+    fontStyle: 'italic'
   },
   image: {
     height: 300,
     width: '100%',
     resizeMode: 'cover',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    zIndex: 1
   }
 })
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    smoothie: state.smoothies.find(smoothie => smoothie.id === ownProps.route.params.id)
+    smoothie: state.smoothiesState.smoothies.find(smoothie => smoothie.id === ownProps.route.params.id)
   }
 }
 

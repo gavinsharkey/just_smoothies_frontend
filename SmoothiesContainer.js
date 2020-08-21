@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const SmoothiesContainer = ({ navigation, smoothies, fetchSmoothies }) => {
+const SmoothiesContainer = ({ navigation, smoothies, isRefreshing, fetchSmoothies }) => {
   
   useEffect(() => {
     fetchSmoothies()
@@ -19,16 +19,23 @@ const SmoothiesContainer = ({ navigation, smoothies, fetchSmoothies }) => {
 
   return (
     <View style={styles.container}>
-      <FlatList keyExtractor={item => String(item.id)} data={smoothies} renderItem={({item}) => (
-        <SmoothieItem smoothie={item} navigation={navigation} />
-      )} />
+      <FlatList
+        refreshing={isRefreshing}
+        onRefresh={() => fetchSmoothies()}
+        keyExtractor={item => String(item.id)}
+        data={smoothies}
+        renderItem={({item}) => (
+          <SmoothieItem smoothie={item} navigation={navigation} />
+        )}
+      />
     </View>
   )
 }
 
 const mapStateToProps = state => {
   return {
-    smoothies: state.smoothies
+    smoothies: state.smoothiesState.smoothies,
+    isRefreshing: state.smoothiesState.isRefreshing
   }
 }
 

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import permissions from './permissionsReducer'
-import smoothies from './smoothiesReducer'
+import smoothiesState from './smoothiesReducer'
 
 export default combineReducers({
   permissions,
-  smoothies
+  smoothiesState
 })
